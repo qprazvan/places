@@ -1,0 +1,4 @@
+spring:
+    data:
+      mongodb:
+          uri: mongodb://qprazvan:ampulamare12@ds213665.mlab.com:13665/xspot-places
