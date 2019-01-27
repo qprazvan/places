@@ -6,19 +6,26 @@ import com.aelastic.xspot.places.repository.PlaceRepository;
 import com.aelastic.xspot.places.repository.TableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Configuration
 @Service
 class PlaceServiceImpl implements PlaceService {
-    @Autowired
+    final
     PlaceRepository placeRepository;
 
     @Autowired
     TableRepository tableRepository;
+
+    @Autowired
+    public PlaceServiceImpl(PlaceRepository placeRepository) {
+        this.placeRepository = placeRepository;
+    }
 
     @Override
     public List<Place> findByCity(String city) {
@@ -41,8 +48,17 @@ class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public void deletePlaceByName(String name) {
-        placeRepository.deletePlaceByName(name);
+    public Optional<Place> findPlaceById(String id) {
+        return placeRepository.findById(id);
+    }
+
+    @Override
+    public void deletePlaceById(String id) throws ChangeSetPersister.NotFoundException {
+        boolean exists = placeRepository.existsById(id);
+        if (!exists){
+            throw new ChangeSetPersister.NotFoundException();
+        }
+        placeRepository.deleteById(id);
     }
 
 

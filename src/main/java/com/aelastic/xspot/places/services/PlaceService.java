@@ -2,8 +2,10 @@ package com.aelastic.xspot.places.services;
 
 import com.aelastic.xspot.places.models.Place;
 import com.aelastic.xspot.places.models.Table;
+import org.springframework.data.crossstore.ChangeSetPersister;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PlaceService {
 
@@ -15,7 +17,9 @@ public interface PlaceService {
 
     Place save(Place place);
 
-    void deletePlaceByName(String name);
+    Optional<Place> findPlaceById(String id);
+
+    void deletePlaceById(String id) throws ChangeSetPersister.NotFoundException;
 
     void modifyTables(List<Table> tabless);
 
