@@ -11,7 +11,7 @@ spring:
       client-id: places_service
       bootstrap-servers: localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: com.aelastic.xspot.places.models.serializers.PlaceSerializer
+      value-serializer: com.fasterxml.jackson.databind.JsonSerializer
 
 
 
