@@ -1,5 +1,6 @@
 package com.aelastic.xspot.places.services;
 
+import com.aelastic.xspot.places.messagebus.outbox.KafkaPlaceProducer;
 import com.aelastic.xspot.places.models.Place;
 import com.aelastic.xspot.places.models.Table;
 import com.aelastic.xspot.places.repository.PlaceRepository;
@@ -20,6 +21,9 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Autowired
     TableRepository tableRepository;
+
+    @Autowired
+    private KafkaPlaceProducer kafkaPlaceProducer;
 
     @Autowired
     public PlaceServiceImpl(PlaceRepository placeRepository) {
@@ -43,7 +47,12 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public Place save(Place place) {
-        return placeRepository.save(place);
+
+        Place savedPlace = placeRepository.save(place);
+
+        kafkaPlaceProducer.publishMessage(savedPlace);
+
+        return savedPlace;
     }
 
     @Override

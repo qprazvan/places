@@ -1,4 +1,17 @@
+server:
+  port: 3116
+
+
 spring:
-    data:
-      mongodb:
-          uri: mongodb://qprazvan:ampulamare12@ds213665.mlab.com:13665/xspot-places
+  data:
+    mongodb:
+      uri: mongodb://qprazvan:ampulamare12@ds213665.mlab.com:13665/xspot-places
+  kafka:
+    producer:
+      client-id: booking-producer
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: com.aelastic.xspot.places.models.serializers.PlaceSerializer
+
+
+
