@@ -23,4 +23,6 @@ public interface PlaceService {
 
     void modifyTables(List<Table> tabless);
 
+    void checkPlaceByPlaceId(String id) throws ChangeSetPersister.NotFoundException;
+
 }

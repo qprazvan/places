@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TableRepository extends MongoRepository<Table, String> {
 
-
+    List<Table> findAllByPlaceId(String id);
 }

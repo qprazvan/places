@@ -5,7 +5,6 @@ import com.aelastic.xspot.places.models.Table;
 import com.aelastic.xspot.places.repository.PlaceRepository;
 import com.aelastic.xspot.places.repository.TableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Configuration
+
 @Service
-class PlaceServiceImpl implements PlaceService {
+public class PlaceServiceImpl implements PlaceService {
     final
     PlaceRepository placeRepository;
 
@@ -66,6 +65,13 @@ class PlaceServiceImpl implements PlaceService {
     public void modifyTables(List<Table> tables) {
         tableRepository.saveAll(tables);
 
+    }
+
+    @Override
+    public void checkPlaceByPlaceId(String id) throws ChangeSetPersister.NotFoundException {
+        if (!placeRepository.existsById(id)) {
+            throw new ChangeSetPersister.NotFoundException();
+        }
     }
 
 

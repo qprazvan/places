@@ -17,6 +17,9 @@ public class Table {
 
     private String sector;
 
+    public Table() {
+    }
+
     public Table(String id, String placeId, int capacity, String sector) {
         this.id = id;
         this.placeId = placeId;
