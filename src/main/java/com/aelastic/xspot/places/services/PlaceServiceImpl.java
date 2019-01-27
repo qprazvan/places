@@ -1,10 +1,13 @@
 package com.aelastic.xspot.places.services;
 
 import com.aelastic.xspot.places.models.Place;
+import com.aelastic.xspot.places.models.Table;
 import com.aelastic.xspot.places.repository.PlaceRepository;
+import com.aelastic.xspot.places.repository.TableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,6 +16,9 @@ import java.util.List;
 class PlaceServiceImpl implements PlaceService {
     @Autowired
     PlaceRepository placeRepository;
+
+    @Autowired
+    TableRepository tableRepository;
 
     @Override
     public List<Place> findByCity(String city) {
@@ -37,6 +43,13 @@ class PlaceServiceImpl implements PlaceService {
     @Override
     public void deletePlaceByName(String name) {
         placeRepository.deletePlaceByName(name);
+    }
+
+
+    @Transactional
+    public void modifyTables(List<Table> tables) {
+        tableRepository.saveAll(tables);
+
     }
 
 

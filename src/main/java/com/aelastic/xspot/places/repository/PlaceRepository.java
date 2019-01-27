@@ -1,6 +1,7 @@
 package com.aelastic.xspot.places.repository;
 
 import com.aelastic.xspot.places.models.Place;
+import com.aelastic.xspot.places.models.Table;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,10 +27,9 @@ public interface PlaceRepository extends MongoRepository<Place, String> {
 //    @Query(value = "delete from place where name = :name", nativeQuery = true)
 //    void deletePlaceByCity(@Param("name") String name);
 
-    @Transactional
-    default void deletePlaceByName(String name) {
+    void deletePlaceByName(String name);
 
-    }
+
 
 
 }
