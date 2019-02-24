@@ -1,6 +1,5 @@
 package com.aelastic.xspot.places.services;
 
-import com.aelastic.xspot.places.messagebus.outbox.KafkaTableProducer;
 import com.aelastic.xspot.places.models.Table;
 import com.aelastic.xspot.places.repository.PlaceRepository;
 import com.aelastic.xspot.places.repository.TableRepository;
@@ -15,13 +14,10 @@ import java.util.Optional;
 public class TableServiceImpl implements TableService {
 
     @Autowired
-    private TableRepository tableRepository;
+    TableRepository tableRepository;
 
     @Autowired
-    private PlaceRepository placeRepository;
-
-    @Autowired
-    private KafkaTableProducer kafkaTableProducer;
+    PlaceRepository placeRepository;
 
     @Override
     public List<Table> getTablesByPlaceId(String id) {
@@ -32,9 +28,7 @@ public class TableServiceImpl implements TableService {
     public List<Table> saveAll(String id, List<Table> tables) throws ChangeSetPersister.NotFoundException {
         if (placeRepository.existsById(id)) {
 
-            List<Table> tableList = tableRepository.saveAll(tables);
-            tableList.forEach(kafkaTableProducer::publishMessage);
-            return tableList;
+            return tableRepository.saveAll(tables);
         }
         throw new ChangeSetPersister.NotFoundException();
 
