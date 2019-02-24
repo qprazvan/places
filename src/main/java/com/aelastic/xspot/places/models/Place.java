@@ -4,8 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotNull;
-import java.util.List;
 import java.util.Objects;
 
 @Document(collection = "places")
@@ -29,8 +27,7 @@ public class Place {
     public Place() {
     }
 
-    public Place(String id, String country, String city, String name, int totalSeats, @NotNull List<Table> tables) {
-        this.id = id;
+    public Place(String country, String city, String name, int totalSeats) {
         this.country = country;
         this.city = city;
         this.name = name;

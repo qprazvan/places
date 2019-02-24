@@ -17,4 +17,7 @@ public interface TableService {
     Optional<Table> getTableById(String id);
 
     void deleteTableById(String tableId) throws ChangeSetPersister.NotFoundException;
+
+    void deleteAll();
+
 }

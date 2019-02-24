@@ -20,8 +20,7 @@ public class Table {
     public Table() {
     }
 
-    public Table(String id, String placeId, int capacity, String sector) {
-        this.id = id;
+    public Table(String placeId, int capacity, String sector) {
         this.placeId = placeId;
         this.capacity = capacity;
         this.sector = sector;

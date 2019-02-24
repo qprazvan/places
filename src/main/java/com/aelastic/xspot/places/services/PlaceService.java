@@ -25,4 +25,6 @@ public interface PlaceService {
 
     void checkPlaceByPlaceId(String id) throws ChangeSetPersister.NotFoundException;
 
+    void deleteAll();
+
 }
