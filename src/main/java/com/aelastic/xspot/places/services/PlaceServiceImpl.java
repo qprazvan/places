@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Service
 public class PlaceServiceImpl implements PlaceService {
-    @Autowired
+    final
     PlaceRepository placeRepository;
 
     @Autowired
@@ -81,11 +81,6 @@ public class PlaceServiceImpl implements PlaceService {
         if (!placeRepository.existsById(id)) {
             throw new ChangeSetPersister.NotFoundException();
         }
-    }
-
-    @Override
-    public void deleteAll() {
-        placeRepository.deleteAll();
     }
 
 

@@ -48,9 +48,4 @@ public class TableServiceImpl implements TableService {
         }
         tableRepository.deleteById(tableId);
     }
-
-    @Override
-    public void deleteAll() {
-        tableRepository.deleteAll();
-    }
 }
